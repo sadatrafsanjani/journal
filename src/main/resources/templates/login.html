@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/signin.css}" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="container">
+
+        <div th:if="${param.error}">
+            <h1 style="color:red">Username or Password is wrong. Please check again</h1>
+        </div>
+        <div th:if="${param.logout}">
+            <h1 style="color:blue">Logged out.</h1>
+        </div>
+
+        <form class="form-signin" th:action="@{/login}" method="post">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <label for="userName" class="sr-only">Username</label>
+            <input type="text" name="username" id="userName" class="form-control" placeholder="Username" required="required" autofocus="autofocus" />
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="required" />
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+        <div class="row">
+            <div class="col-md-2 col-md-offset-5">
+                <a th:href="@{/register}">Not Registered Yet?</a>
+            </div>
+        </div>
+    </div> <!-- /container -->
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/head :: head">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav th:replace="fragments/nav :: nav">
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Header -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">User Registration</h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Registration Row -->
+        <div class="row">
+            <div class="col-md-6 col-md-offset-4">
+                <form th:action="@{/registration}" th:object="${user}" method="post">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" class="form-control" th:field="*{fullName}" />
+                        <span th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">Full Name can't be empty!</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control" th:field="*{username}" />
+                        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username can't be empty!</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" th:field="*{password}" />
+                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password can't be empty!</span>
+                    </div>
+                    <div class="form-group">
+                        <label>E-Mail</label>
+                        <input type="email" class="form-control" th:field="*{email}" />
+                        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email can't be empty!</span>
+                    </div>
+                    <button type="submit" class="btn btn-info btn-block">Register</button>
+                </form>
+            </div><!-- /.row -->
+        </div><!-- /.row -->
+
+        <hr />
+
+        <!-- Footer -->
+        <footer th:replace="fragments/footer :: footer">
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <div th:replace="fragments/script :: script"></div>
+
+</body>
+
+</html>

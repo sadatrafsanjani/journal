@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head th:replace="fragments/head :: head">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav th:replace="fragments/nav :: nav">
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Header -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    All Posts
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <!-- Projects Row -->
+        <div class="row">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Title</td>
+                        <td>Published</td>
+                        <td>Edit Post</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="post : ${posts}">
+                        <td th:text="${post.id}"></td>
+                        <td th:text="${post.title}"></td>
+                        <td th:text="${post.published}"></td>
+                        <td>
+                            <a th:href="@{/user/edit/} + ${post.id}" class="btn btn-info">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                Re-edit
+                            </a>
+                        </td>
+                        <td>
+                            <a th:href="@{/user/delete/} + ${post.id}" class="btn btn-danger delete">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row text-center">
+            <div th:if="${posts.totalPages != 1}" class="form-group col-lg-12 pagination-centered">
+                <ul class="pagination">
+                    <li th:class="${posts.number == 0} ? disabled">
+                        <a class="pageLink" th:href="@{/user/profile/(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+                    </li>
+                    <li th:class="${posts.number == 0} ? disabled">
+                        <a class="pageLink" th:href="@{/user/profile/(pageSize=${selectedPageSize}, page=${posts.number})}">&larr;</a>
+                    </li>
+                    <li th:class="${posts.number == (page - 1)} ? 'active pointer-disabled'"
+                        th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+                        <a class="pageLink" th:href="@{/user/profile/(pageSize=${selectedPageSize}, page=${page})}" th:text="${page}"></a>
+                    </li>
+                    <li th:class="${posts.number + 1 == posts.totalPages} ? disabled">
+                        <a class="pageLink" th:href="@{/user/profile/(pageSize=${selectedPageSize}, page=${posts.number + 2})}">&rarr;</a>
+                    </li>
+                    <li th:class="${posts.number + 1 == posts.totalPages} ? disabled">
+                        <a class="pageLink" th:href="@{/user/profile/(pageSize=${selectedPageSize}, page=${posts.totalPages})}">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr />
+
+        <!-- Footer -->
+        <footer th:replace="fragments/footer :: footer">
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <div th:replace="fragments/script :: script"></div>
+
+</body>
+
+</html>

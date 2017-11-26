@@ -1,0 +1,14 @@
+<div th:fragment="script">
+
+    <script th:src="@{js/jquery.min.js}"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
+
+    <div sec:authorize="isAuthenticated()">
+        <script th:src="@{js/bootbox.min.js}"></script>
+        <script sec:authorize="hasRole('ROLE_ADMIN')" th:src="@{/js/admin-post.js}"></script>
+        <script sec:authorize="hasRole('ROLE_USER')" th:src="@{/js/user-post.js}"></script>
+        <script sec:authorize="hasRole('ROLE_ADMIN')" th:src="@{/js/user.js}"></script>
+        <script th:src="@{js/dialog.js}"></script>
+    </div>
+
+</div>

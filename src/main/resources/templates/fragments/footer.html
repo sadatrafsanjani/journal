@@ -1,0 +1,8 @@
+<footer th:fragment="footer">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <p th:text="'Copyright &copy; ' + ${#dates.year(#dates.createNow())}"></p>
+        </div>
+    </div>
+    <!-- /.row -->
+</footer>
