@@ -18,9 +18,8 @@ import java.nio.file.Paths;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/journal/api/v1")
 @Api(name = "Journal Rest API", description = "Provides basic crud methods", stage = ApiStage.BETA)
-public class RestfulapiController {
+public class APIController {
 
     // http://localhost:8080/journal/api/v1/post.json
     // http://localhost:8080/jsondoc-ui.html
@@ -29,12 +28,12 @@ public class RestfulapiController {
     private UserService userService;
 
     @Autowired
-    public RestfulapiController(PostService postService, UserService userService) {
+    public APIController(PostService postService, UserService userService) {
         this.postService = postService;
         this.userService = userService;
     }
 
-    @RequestMapping(value="/post.json", method = RequestMethod.GET)
+    @RequestMapping(value="/api", method = RequestMethod.GET)
     @ApiMethod(description = "Get all visible posts")
     public Iterable<Post> posts() throws Exception {
 
@@ -47,7 +46,7 @@ public class RestfulapiController {
         return posts;
     }
 
-    @RequestMapping(value="/{id}", method = RequestMethod.GET)
+    @RequestMapping(value="/api/{id}", method = RequestMethod.GET)
     @ApiMethod(description = "Get a specific visible post")
     public Post post(@PathVariable("id") Long id) throws Exception {
 

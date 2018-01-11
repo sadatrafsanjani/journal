@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                             "/img/**",
                             "/js/**",
                             "/uploads/**",
-                            "/journal/api/v1/**",
+                            "/api/**",
                             "/jsondoc",
                             "/jsondoc-ui.html").permitAll()
                     .antMatchers("/admin/**").hasRole("ADMIN")
